@@ -113,20 +113,6 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.12;
 .header-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 
 .brand { display: flex; align-items: center; gap: 12px; }
-.brand-sun {
-  width: 34px; height: 34px; border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 118%, var(--copper) 0 42%, transparent 43%),
-    conic-gradient(from 202deg at 50% 100%,
-      transparent 0 18deg, var(--copper-light) 18deg 21deg,
-      transparent 21deg 38deg, var(--copper-light) 38deg 41deg,
-      transparent 41deg 58deg, var(--copper-light) 58deg 61deg,
-      transparent 61deg 78deg, var(--copper-light) 78deg 81deg,
-      transparent 81deg 98deg, var(--copper-light) 98deg 101deg,
-      transparent 101deg 118deg, var(--copper-light) 118deg 121deg,
-      transparent 121deg 138deg);
-  flex-shrink: 0;
-}
 .brand-text { display: flex; flex-direction: column; line-height: 1; }
 .brand-name { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; color: var(--ink); letter-spacing: .02em; }
 .brand-sub { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--copper); margin-top: 3px; }
@@ -335,7 +321,6 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.12;
 .site-footer { background: var(--ink); color: #d9cfc2; padding-top: 60px; }
 .footer-inner { display: grid; grid-template-columns: 1fr 1fr auto; gap: 40px; align-items: center; padding-bottom: 40px; }
 .footer-brand { display: flex; align-items: center; gap: 14px; }
-.footer-brand .brand-sun { width: 40px; height: 40px; }
 .footer-name { font-family: var(--serif); font-size: 1.5rem; color: #fff; display: block; }
 .footer-sub { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--copper-light); }
 .footer-contact { display: flex; flex-direction: column; gap: 6px; font-size: .92rem; }
