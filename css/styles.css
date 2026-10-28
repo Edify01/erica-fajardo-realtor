@@ -168,7 +168,7 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.12;
   color: #fff;
   background:
     linear-gradient(120deg, rgba(43,38,32,.72) 0%, rgba(43,38,32,.28) 55%, rgba(169,84,45,.30) 100%),
-    url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80") center/cover no-repeat;
+    url("../images/hero.jpg") center/cover no-repeat; /* swap: images/hero.jpg */
 }
 .hero-overlay {
   position: absolute; inset: 0;
@@ -210,7 +210,7 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.12;
 .about-photo {
   aspect-ratio: 4/5; border-radius: var(--radius); box-shadow: var(--shadow-lg);
   background: linear-gradient(160deg, rgba(169,84,45,.15), rgba(43,38,32,.35)),
-    url("https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80") center/cover no-repeat;
+    url("../images/about.png") center/cover no-repeat; /* swap: images/about.png */
 }
 .about-badge {
   position: absolute; bottom: -26px; right: -18px;
