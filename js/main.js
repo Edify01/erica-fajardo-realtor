@@ -64,7 +64,7 @@
   // Messages are delivered to contact@ericamyrealtor.com via FormSubmit.co.
   // The FIRST submission sends a one-time activation email to that inbox;
   // click "Activate Form" in it and all later messages arrive automatically.
-  // Set to "" to fall back to opening the visitor's email app instead.
+  // Messages are always sent directly from the page (never via the email app).
   const FORM_ENDPOINT = "https://formsubmit.co/ajax/contact@ericamyrealtor.com";
 
   const form = document.getElementById("contactForm");
@@ -114,38 +114,14 @@
         return;
       }
 
-      // Build a mailto so the message is delivered without a backend
+      // Collect values
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
       const phone = document.getElementById("phone").value.trim();
       const interest = document.getElementById("interest").value;
       const message = document.getElementById("message").value.trim();
 
-      const subject = encodeURIComponent(`New inquiry from ${name} (${interest})`);
-      const bodyLines = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Phone: ${phone || "—"}`,
-        `Interested in: ${interest}`,
-        "",
-        message,
-      ].join("\n");
-      const mailto = `mailto:contact@ericamyrealtor.com?subject=${subject}&body=${encodeURIComponent(bodyLines)}`;
-
-      const openMailApp = () => {
-        note.className = "form-note success";
-        note.textContent = "Thank you! Opening your email app to send your message…";
-        window.location.href = mailto;
-        setTimeout(() => form.reset(), 900);
-      };
-
-      // No form service configured yet → fall back to the visitor's email app
-      if (!FORM_ENDPOINT) {
-        openMailApp();
-        return;
-      }
-
-      // Send directly through the form service (no email app needed)
+      // Send directly through the form service (no email app)
       const submitBtn = form.querySelector('button[type="submit"]');
       const btnLabel = submitBtn.textContent;
       submitBtn.disabled = true;
