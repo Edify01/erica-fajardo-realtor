@@ -11,5 +11,5 @@ Tips:
 - Use `.jpg` and keep the lowercase filename. Vercel is case-sensitive.
 - Compress photos before adding them, for example at https://squoosh.app.
 - If you don't see the new photo, hard-refresh the browser (Cmd+Shift+R).
-- To use a different filename or format, update the `url("../images/...")`
-  line in `css/styles.css` (`.hero` and `.about-photo` rules).
+- Filenames are referenced in `css/styles.css` (`.hero` rule → hero.jpg)
+  and `index.html` (About section `<img>` → about.jpg).
