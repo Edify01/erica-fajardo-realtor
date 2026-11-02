@@ -1,0 +1,12 @@
+{
+  "name": "Erica Fajardo, REALTOR®",
+  "short_name": "Erica Fajardo",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#a9542d",
+  "background_color": "#faf5ee",
+  "display": "browser",
+  "start_url": "/"
+}
