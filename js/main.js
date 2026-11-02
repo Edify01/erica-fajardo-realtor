@@ -61,9 +61,11 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ---------- Contact form ---------- */
-  // Paste your Formspree endpoint here, e.g. "https://formspree.io/f/abcdwxyz".
-  // Leave empty ("") to fall back to opening the visitor's email app.
-  const FORM_ENDPOINT = "";
+  // Messages are delivered to contact@ericamyrealtor.com via FormSubmit.co.
+  // The FIRST submission sends a one-time activation email to that inbox;
+  // click "Activate Form" in it and all later messages arrive automatically.
+  // Set to "" to fall back to opening the visitor's email app instead.
+  const FORM_ENDPOINT = "https://formsubmit.co/ajax/contact@ericamyrealtor.com";
 
   const form = document.getElementById("contactForm");
   const note = document.getElementById("formNote");
@@ -153,18 +155,21 @@
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          name,
-          email,
-          phone: phone || "—",
-          interest,
-          message,
-          _subject: `New inquiry from ${name} (${interest})`,
+          Name: name,
+          Email: email,
+          Phone: phone || "—",
+          "Interested in": interest,
+          Message: message,
+          _subject: `New website inquiry from ${name} (${interest})`,
           _replyto: email,
-          _gotcha: form.querySelector('[name="_gotcha"]')?.value || "",
+          _template: "table",
+          _captcha: "false",
+          _honey: form.querySelector('[name="_honey"]')?.value || "",
         }),
       })
-        .then((res) => {
-          if (!res.ok) throw new Error("Request failed");
+        .then((res) => res.json().catch(() => ({})).then((data) => ({ res, data })))
+        .then(({ res, data }) => {
+          if (!res.ok || String(data.success) === "false") throw new Error("Request failed");
           note.className = "form-note success";
           note.textContent = "Thank you! Your message was sent. Erica will be in touch soon.";
           form.reset();
