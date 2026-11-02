@@ -29,7 +29,7 @@ EricaRealtor-Website/
 
 ## Customize
 - **Photos:** Replace the Unsplash placeholder URLs in `css/styles.css` (`.hero` and `.about-photo`) with Erica's real hero and portrait images.
-- **Contact info:** Phone, email, and address live in `index.html` — search for `6617787051`, `Ericafajardorealtor@gmail.com`, and `4550 California Ave`.
+- **Contact info:** Phone, email, and address live in `index.html` — search for `6617787051`, `contact@ericamyrealtor.com`, and `4550 California Ave`.
 - **Form delivery:** Currently uses `mailto:`. To capture leads server-side, connect the form to a service like Formspree or Netlify Forms.
 
 ## Fonts & assets

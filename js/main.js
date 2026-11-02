@@ -60,7 +60,11 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Contact form validation ---------- */
+  /* ---------- Contact form ---------- */
+  // Paste your Formspree endpoint here, e.g. "https://formspree.io/f/abcdwxyz".
+  // Leave empty ("") to fall back to opening the visitor's email app.
+  const FORM_ENDPOINT = "";
+
   const form = document.getElementById("contactForm");
   const note = document.getElementById("formNote");
 
@@ -124,15 +128,56 @@
         "",
         message,
       ].join("\n");
-      const mailto = `mailto:Ericafajardorealtor@gmail.com?subject=${subject}&body=${encodeURIComponent(bodyLines)}`;
+      const mailto = `mailto:contact@ericamyrealtor.com?subject=${subject}&body=${encodeURIComponent(bodyLines)}`;
 
-      note.textContent = "Thank you! Opening your email app to send your message…";
-      note.classList.add("success");
-      window.location.href = mailto;
+      const openMailApp = () => {
+        note.className = "form-note success";
+        note.textContent = "Thank you! Opening your email app to send your message…";
+        window.location.href = mailto;
+        setTimeout(() => form.reset(), 900);
+      };
 
-      setTimeout(() => {
-        form.reset();
-      }, 900);
+      // No form service configured yet → fall back to the visitor's email app
+      if (!FORM_ENDPOINT) {
+        openMailApp();
+        return;
+      }
+
+      // Send directly through the form service (no email app needed)
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const btnLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+
+      fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: phone || "—",
+          interest,
+          message,
+          _subject: `New inquiry from ${name} (${interest})`,
+          _replyto: email,
+          _gotcha: form.querySelector('[name="_gotcha"]')?.value || "",
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Request failed");
+          note.className = "form-note success";
+          note.textContent = "Thank you! Your message was sent. Erica will be in touch soon.";
+          form.reset();
+        })
+        .catch(() => {
+          note.className = "form-note error";
+          note.innerHTML =
+            'Sorry, something went wrong. Please call <a href="tel:+16617787051">661-778-7051</a> or email <a href="mailto:contact@ericamyrealtor.com">contact@ericamyrealtor.com</a>.';
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = btnLabel;
+        });
     });
   }
 })();
